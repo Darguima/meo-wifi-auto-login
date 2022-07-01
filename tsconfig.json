@@ -3,7 +3,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@pages/*": ["./src/pages/*"]
+      "@pages/*": ["./src/pages/*"],
+      "@routes/*": ["./src/routes/*"]
     },
     
     /* Visit https://aka.ms/tsconfig.json to read more about this file */

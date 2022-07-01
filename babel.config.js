@@ -8,7 +8,8 @@ module.exports = {
   plugins: [
     ['module-resolver', {
       alias: {
-        '@pages': './src/pages'
+        '@pages': './src/pages',
+        '@routes': './src/routes'
       }
     }]
   ]

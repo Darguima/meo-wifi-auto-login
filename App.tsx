@@ -1,11 +1,11 @@
 import React from 'react'
 import { Provider as PaperProvider } from 'react-native-paper'
 
-import MainPage from '@pages/MainPage'
+import Routes from './src/routes'
 
 const App = () => (
   <PaperProvider>
-    <MainPage />
+    <Routes />
   </PaperProvider>
 )
 
