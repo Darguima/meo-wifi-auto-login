@@ -5,23 +5,30 @@ import { createStackNavigator, StackNavigationProp } from '@react-navigation/sta
 import IntroductionPage from '@pages/IntroductionPage'
 import MainPage from '@pages/MainPage'
 
+import useSettings from '@contexts/settings'
+
 export type RootStackParamList = {
-	IntroductionPage: undefined,
 	MainPage: undefined,
 }
 
 const Routes = () => {
+	const { settings: { showIntroduction }, areSettingsLoaded } = useSettings()
+
+	if (!areSettingsLoaded) {
+		return <></>
+	} else if (showIntroduction) {
+		return <IntroductionPage />
+	} else {
+		return RootStack()
+	}
+}
+
+const RootStack = () => {
 	const { Navigator, Screen } = createStackNavigator<RootStackParamList>()
 
 	return (
 		<NavigationContainer>
 			<Navigator>
-				<Screen
-					name='IntroductionPage'
-					component={IntroductionPage}
-					options={{ headerShown: false }}
-				/>
-
 				<Screen
 					name='MainPage'
 					component={MainPage}

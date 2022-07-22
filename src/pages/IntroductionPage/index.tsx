@@ -1,19 +1,19 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
-import { useNavigationRootStack } from '@routes/index'
 
 import { Button, Text } from 'react-native-paper'
 
-const IntroductionPage:React.FC = () => {
-	const { navigate } = useNavigationRootStack()
+import useSettings from '@contexts/settings'
 
+const IntroductionPage:React.FC = () => {
+	const { changeSettings } = useSettings()
 	return (
 		<View style={styles.container}>
 			<Text>Introduction Page</Text>
 			<Button
 				mode="contained"
 				icon="rocket"
-				onPress={() => { navigate('MainPage') }}
+				onPress={() => changeSettings({ showIntroduction: false })}
 			>
         Let's go!!
 			</Button>
@@ -25,7 +25,9 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		justifyContent: 'space-evenly',
-		alignItems: 'center'
+		alignItems: 'center',
+
+		backgroundColor: '#fff'
 	}
 })
 

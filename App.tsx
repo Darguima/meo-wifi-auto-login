@@ -1,12 +1,16 @@
 import React from 'react'
-import { Provider as PaperProvider } from 'react-native-paper'
 
 import Routes from './src/routes'
 
+import { SettingsProvider } from '@contexts/settings'
+import { Provider as PaperProvider } from 'react-native-paper'
+
 const App = () => (
-	<PaperProvider>
-		<Routes />
-	</PaperProvider>
+	<SettingsProvider>
+		<PaperProvider>
+			<Routes />
+		</PaperProvider>
+	</SettingsProvider>
 )
 
 export default App

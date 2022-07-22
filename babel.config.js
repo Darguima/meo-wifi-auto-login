@@ -9,7 +9,8 @@ module.exports = {
 		['module-resolver', {
 			alias: {
 				'@pages': './src/pages',
-				'@routes': './src/routes'
+				'@routes': './src/routes',
+				'@contexts': './src/contexts'
 			}
 		}]
 	]
