@@ -11,9 +11,9 @@ export type RootStackParamList = {
 }
 
 const Routes = () => {
-  const { Navigator, Screen } = createStackNavigator<RootStackParamList>()
+	const { Navigator, Screen } = createStackNavigator<RootStackParamList>()
 
-  return (
+	return (
 		<NavigationContainer>
 			<Navigator>
 				<Screen
@@ -29,7 +29,7 @@ const Routes = () => {
 				/>
 			</Navigator>
 		</NavigationContainer>
-  )
+	)
 }
 
 export const useNavigationRootStack = () => useNavigation<StackNavigationProp<RootStackParamList>>()
