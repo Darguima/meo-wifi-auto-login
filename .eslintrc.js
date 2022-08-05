@@ -25,6 +25,7 @@ module.exports = {
 	],
 	rules: {
 		'no-tabs': 0,
+		'no-undef': 0, // typescript already does it
 		indent: ['error', 'tab']
 	}
 }

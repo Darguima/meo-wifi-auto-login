@@ -2,7 +2,7 @@ import React from 'react'
 import { NavigationContainer, useNavigation } from '@react-navigation/native'
 import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack'
 
-import IntroductionPage from '@pages/IntroductionPage'
+import IntroPage from '@pages/IntroPage'
 import MainPage from '@pages/MainPage'
 
 import useSettings from '@contexts/settings'
@@ -17,7 +17,7 @@ const Routes = () => {
 	if (!areSettingsLoaded) {
 		return <></>
 	} else if (showIntroduction) {
-		return <IntroductionPage />
+		return <IntroPage />
 	} else {
 		return RootStack()
 	}
