@@ -1,26 +1,42 @@
-import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import React, { useState } from 'react'
+import { View, StyleSheet, ScrollView, Dimensions } from 'react-native'
 
-import { Button, Text, useTheme } from 'react-native-paper'
+import { useTheme } from 'react-native-paper'
 
-import useSettings from '@contexts/settings'
+import Footer from './Components/Footer'
+
+import FirstPage from './Components/FirstPage'
+import LocationPage from './Components/LocationPage'
+import MeoPage from './Components/MeoPage'
 
 const IntroductionPage:React.FC = () => {
 	const styles = makeStyles(useTheme().colors)
 
-	const { changeSettings } = useSettings()
+	const [pageIndex, setPageIndex] = useState(0)
 
 	return (
 		<View style={styles.container}>
-			<Text>Introduction Page</Text>
-			<Button
-				mode="contained"
-				icon="rocket"
-				style={styles.button}
-				onPress={() => changeSettings({ showIntroduction: false })}
+
+			<ScrollView
+				horizontal={true}
+				pagingEnabled={true}
+				showsHorizontalScrollIndicator={false}
+				onScroll={({ nativeEvent: { contentOffset: { x: xPosition } } }) => {
+					setPageIndex(Math.round(xPosition / Dimensions.get('window').width))
+				}}
 			>
-        Let's go!!
-			</Button>
+
+				<FirstPage />
+				<LocationPage />
+				<MeoPage />
+
+			</ScrollView>
+
+			<Footer
+				amountOfPages={3}
+				currentPageIndex={pageIndex}
+			/>
+
 		</View>
 	)
 }
@@ -28,14 +44,7 @@ const IntroductionPage:React.FC = () => {
 const makeStyles = (colors : ReactNativePaper.ThemeColors) => StyleSheet.create({
 	container: {
 		flex: 1,
-		justifyContent: 'space-evenly',
-		alignItems: 'center',
-
 		backgroundColor: colors.background
-	},
-
-	button: {
-		backgroundColor: colors.primaryVariant
 	}
 })
 

@@ -5,7 +5,10 @@
     "paths": {
       "@pages/*": ["./src/pages/*"],
       "@routes/*": ["./src/routes/*"],
-      "@contexts/*": ["./src/contexts/*"]
+      "@contexts/*": ["./src/contexts/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@components/*": ["./src/components/*"],
+      "@utils/*": ["./src/utils/*"]
     },
     
     /* Visit https://aka.ms/tsconfig.json to read more about this file */

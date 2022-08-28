@@ -22,7 +22,9 @@ export const overrideTheme = {
 		background: '#fff',
 		onBackground: '#000000',
 
-		error: '#b00020'
+		error: '#b00020',
+
+		url: '#0077ff'
 	}
 }
 
