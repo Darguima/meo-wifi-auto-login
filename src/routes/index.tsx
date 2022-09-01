@@ -4,35 +4,53 @@ import { createStackNavigator, StackNavigationProp } from '@react-navigation/sta
 
 import IntroPage from '@pages/IntroPage'
 import MainPage from '@pages/MainPage'
+import MeoLoginPage from '@pages/MeoLoginPage'
 
 import useSettings from '@contexts/settings'
+import { useTheme } from 'react-native-paper'
 
 export type RootStackParamList = {
 	MainPage: undefined,
+	MeoLoginPage: undefined,
 }
 
 const Routes = () => {
 	const { settings: { showIntroduction }, areSettingsLoaded } = useSettings()
+	const { colors } = useTheme()
 
 	if (!areSettingsLoaded) {
 		return <></>
 	} else if (showIntroduction) {
 		return <IntroPage />
 	} else {
-		return RootStack()
+		return RootStack(colors)
 	}
 }
 
-const RootStack = () => {
+const RootStack = (colors: ReactNativePaper.ThemeColors) => {
 	const { Navigator, Screen } = createStackNavigator<RootStackParamList>()
 
 	return (
 		<NavigationContainer>
-			<Navigator>
+			<Navigator
+				initialRouteName='MainPage'
+				screenOptions={{
+					headerStyle: { backgroundColor: colors.primary },
+
+					title: '',
+					headerTitleStyle: { fontSize: 20 }
+				}}
+			>
 				<Screen
 					name='MainPage'
 					component={MainPage}
-					options={{ headerShown: false }}
+
+					options={{ title: 'Meo WiFi Auto Login' }}
+				/>
+
+				<Screen
+					name='MeoLoginPage'
+					component={MeoLoginPage}
 				/>
 			</Navigator>
 		</NavigationContainer>

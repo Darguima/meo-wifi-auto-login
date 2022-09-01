@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet, Dimensions } from 'react-native'
+import { View, Text, StyleSheet, Dimensions, ViewStyle } from 'react-native'
 
 import { useTheme } from 'react-native-paper'
 
@@ -14,22 +14,28 @@ interface Props {
 
 	centerContent: React.ReactNode,
 	bottomContent?: React.ReactNode,
+
+	containerViewStyle?: ViewStyle,
+
+	iconContainerViewStyle?: ViewStyle,
 }
 
 const IntroScreen:React.FC<Props> = ({
 	iconName = 'border-none-variant', title,
 	icon, iconBackgroundColor,
-	centerContent, bottomContent
+	centerContent, bottomContent,
+
+	containerViewStyle, iconContainerViewStyle
 }) => {
 	const colors = useTheme().colors
 	const styles = makeStyles(colors, iconBackgroundColor)
 
 	return (
-		<View style={styles.container}>
+		<View style={[styles.container, containerViewStyle]}>
 
 			<View style={styles.topContainer}>
 
-				<View style={styles.iconContainer}>
+				<View style={[styles.iconContainer, iconContainerViewStyle]}>
 					{
 						!icon &&
 						<MaterialCommunityIcons

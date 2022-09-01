@@ -3,6 +3,7 @@ import { StatusBar } from 'react-native'
 
 import Routes from './src/routes'
 
+import { MeoAccountProvider } from '@contexts/meoAccount'
 import { SettingsProvider } from '@contexts/settings'
 import { Provider as PaperProvider, DefaultTheme } from 'react-native-paper'
 
@@ -30,12 +31,14 @@ export const overrideTheme = {
 
 const App = () => (
 	<SettingsProvider>
-		<PaperProvider theme={overrideTheme}>
+		<MeoAccountProvider>
+			<PaperProvider theme={overrideTheme}>
 
-			<StatusBar backgroundColor={overrideTheme.colors.primary} />
-			<Routes />
+				<StatusBar backgroundColor={overrideTheme.colors.primary} barStyle="dark-content" />
+				<Routes />
 
-		</PaperProvider>
+			</PaperProvider>
+		</MeoAccountProvider>
 	</SettingsProvider>
 )
 
