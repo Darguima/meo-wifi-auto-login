@@ -9,6 +9,17 @@ import { Provider as PaperProvider, DefaultTheme } from 'react-native-paper'
 
 export const overrideTheme = {
 	...DefaultTheme,
+
+	version: 2,
+
+	spacing: {
+		// https://material.io/design/layout/responsive-layout-grid.html
+		margin: 16,
+
+		padding: 16,
+		divisionPadding: 8 // to use as a space between text and icons for example
+	},
+
 	colors: {
 		...DefaultTheme.colors,
 

@@ -1,32 +1,53 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
-import { Button, Text } from 'react-native-paper'
 
-import { useNavigationRootStack } from '@routes/index'
+import { useTheme, FAB } from 'react-native-paper'
 
-const MainPage: React.FC = () => {
-	const { navigate } = useNavigationRootStack()
+import NetworkStatusSurface from './components/NetworkStatusSurface'
+import MeoAccountSurface from './components/MeoAccountSurface'
+import ConnectionMessageSurface from './components/ConnectionMessageSurface'
+
+const MainPage:React.FC = () => {
+	const { colors } = useTheme()
+	const styles = makeStyles(useTheme())
 
 	return (
 		<View style={styles.container}>
-			<Text>Main Page</Text>
 
-			<Button
-				mode='contained'
-				onPress={() => navigate('MeoLoginPage')}
-			>
-				Meo Account
-			</Button>
+			<NetworkStatusSurface />
+			<MeoAccountSurface />
+			<ConnectionMessageSurface />
+
+			<FAB
+				icon={'wifi'}
+				onPress={() => console.log('Pressed')}
+				style={styles.FAB}
+				color={colors.onPrimaryVariant}
+				// loading
+			/>
+
 		</View>
 	)
 }
 
-const styles = StyleSheet.create({
+const makeStyles = ({ colors, spacing }: ReactNativePaper.Theme) => StyleSheet.create({
 	container: {
 		flex: 1,
-		justifyContent: 'space-evenly',
-		alignItems: 'center'
+		alignItems: 'center',
+		backgroundColor: colors.background,
+
+		paddingTop: spacing.margin,
+		paddingHorizontal: spacing.margin
+	},
+
+	FAB: {
+		position: 'absolute',
+		bottom: spacing.margin,
+		right: spacing.margin,
+
+		backgroundColor: colors.primaryVariant
 	}
+
 })
 
 export default MainPage

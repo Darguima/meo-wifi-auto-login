@@ -2,12 +2,15 @@ import React from 'react'
 import { NavigationContainer, useNavigation } from '@react-navigation/native'
 import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack'
 
+import { useTheme } from 'react-native-paper'
+
+import useSettings from '@contexts/settings'
+
 import IntroPage from '@pages/IntroPage'
 import MainPage from '@pages/MainPage'
 import MeoLoginPage from '@pages/MeoLoginPage'
 
-import useSettings from '@contexts/settings'
-import { useTheme } from 'react-native-paper'
+import OverflowMenu from './components/OverflowMenu'
 
 export type RootStackParamList = {
 	MainPage: undefined,
@@ -38,14 +41,17 @@ const RootStack = (colors: ReactNativePaper.ThemeColors) => {
 					headerStyle: { backgroundColor: colors.primary },
 
 					title: '',
-					headerTitleStyle: { fontSize: 20 }
+					headerTitleStyle: { fontSize: 20, color: colors.onPrimary }
 				}}
 			>
 				<Screen
 					name='MainPage'
 					component={MainPage}
 
-					options={{ title: 'Meo WiFi Auto Login' }}
+					options={{
+						title: 'Meo WiFi Auto Login',
+						headerRight: () => <OverflowMenu />
+					}}
 				/>
 
 				<Screen
