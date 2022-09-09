@@ -6,7 +6,7 @@ import { useTheme } from 'react-native-paper'
 import Footer from './Components/Footer'
 
 import FirstPage from './Components/FirstPage'
-import LocationPage from './Components/LocationPage'
+import LocationPage from '@pages/LocationPage'
 import MeoPage from './Components/MeoPage'
 
 const IntroductionPage:React.FC = () => {
@@ -24,6 +24,8 @@ const IntroductionPage:React.FC = () => {
 				onScroll={({ nativeEvent: { contentOffset: { x: xPosition } } }) => {
 					setPageIndex(Math.round(xPosition / Dimensions.get('window').width))
 				}}
+
+				contentContainerStyle={styles.scrollViewContent}
 			>
 
 				<FirstPage />
@@ -45,6 +47,11 @@ const makeStyles = (colors : ReactNativePaper.ThemeColors) => StyleSheet.create(
 	container: {
 		flex: 1,
 		backgroundColor: colors.background
+	},
+
+	scrollViewContent: {
+		paddingTop: 40,
+		backgroundColor: colors.surfaceVariant
 	}
 })
 

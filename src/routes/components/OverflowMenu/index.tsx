@@ -39,12 +39,21 @@ const OverflowMenu = () => {
 					}}
 					title="Meo Account"
 				/>
+
+				<Menu.Item
+					onPress={() => {
+						navigate('LocationPage')
+						setVisible(false)
+					}}
+					title="Location Settings"
+				/>
+
 			</Menu>
 		</View>
 	)
 }
 
-const makeStyles = (colors :ReactNativePaper.ThemeColors) => StyleSheet.create({
+const makeStyles = (colors: ReactNativePaper.ThemeColors) => StyleSheet.create({
 	container: {
 		backgroundColor: colors.primary,
 		marginRight: 8

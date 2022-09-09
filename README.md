@@ -10,6 +10,6 @@ Meo WiFi Auto Login is a GUI interface for the package [`meo-wifi-login-js`](htt
 
 ## Mockup
 
-Current preview of the App.
+https://user-images.githubusercontent.com/49988070/189159612-57229bfb-30b2-4f87-9430-9f8c8204c88f.mp4
 
 ![Current Mockup](./assets/mockup.png)

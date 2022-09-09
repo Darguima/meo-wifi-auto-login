@@ -1,9 +1,12 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { PermissionsAndroid } from 'react-native'
 
 const settingsDefault = {
-	showIntroduction: true
+	showIntroduction: true,
+
+	hasLocationPermissions: false
 }
 
 type settingsSchema = typeof settingsDefault
@@ -26,14 +29,17 @@ export const SettingsProvider: React.FC<{children: React.ReactNode}> = ({ childr
 	const [settings, setSettings] = useState<settingsSchema>(settingsDefault)
 
 	useEffect(() => {
-		AsyncStorage.getItem('@settings')
-			.then((json) => {
-				if (json) {
-					setSettings({ ...settingsDefault, ...JSON.parse(json) })
-				}
-			})
-			.catch()
-			.finally(() => { setAreSettingsLoaded(true) })
+		(async () => {
+			const json = await AsyncStorage.getItem('@settings')
+
+			if (json) {
+				setSettings({ ...settingsDefault, ...JSON.parse(json) })
+			}
+
+			changeSettings({ hasLocationPermissions: await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION) })
+
+			setAreSettingsLoaded(true)
+		})()
 	}, [])
 
 	const changeSettings = (newSetting: Partial<settingsSchema>) => {

@@ -28,7 +28,7 @@ const IntroScreen:React.FC<Props> = ({
 	containerViewStyle, iconContainerViewStyle
 }) => {
 	const colors = useTheme().colors
-	const styles = makeStyles(colors, iconBackgroundColor)
+	const styles = makeStyles(useTheme(), iconBackgroundColor)
 
 	return (
 		<View style={[styles.container, containerViewStyle]}>
@@ -65,7 +65,7 @@ const IntroScreen:React.FC<Props> = ({
 	)
 }
 
-const makeStyles = (colors :ReactNativePaper.ThemeColors, iconBackgroundColor?: string) => StyleSheet.create({
+const makeStyles = ({ colors, spacing }: ReactNativePaper.Theme, iconBackgroundColor?: string) => StyleSheet.create({
 	container: {
 		justifyContent: 'space-between',
 		alignItems: 'center',
@@ -73,9 +73,7 @@ const makeStyles = (colors :ReactNativePaper.ThemeColors, iconBackgroundColor?: 
 		width: Dimensions.get('window').width,
 		flex: 1,
 
-		paddingHorizontal: 16,
-
-		backgroundColor: colors.surfaceVariant
+		paddingHorizontal: spacing.padding
 	},
 
 	topContainer: {
@@ -93,7 +91,7 @@ const makeStyles = (colors :ReactNativePaper.ThemeColors, iconBackgroundColor?: 
 		borderRadius: 200 / 2,
 		backgroundColor: iconBackgroundColor || colors.primaryVariant,
 
-		marginTop: 56
+		marginTop: spacing.margin
 	},
 
 	titleText: {
@@ -110,11 +108,11 @@ const makeStyles = (colors :ReactNativePaper.ThemeColors, iconBackgroundColor?: 
 
 		width: '100%',
 
-		paddingTop: 8
+		paddingTop: spacing.divisionPadding
 	},
 
 	bottomContentContainer: {
-		marginVertical: 16
+		marginVertical: spacing.margin
 	}
 })
 
