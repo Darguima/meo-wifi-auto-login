@@ -25,7 +25,7 @@ const LocationPage:React.FC = () => {
 						<Text style={styles.infoText}>For a better experience, allow us to access your location.</Text>
 					}
 					{hasLocationPermissions &&
-						<Text style={styles.infoText}>Thanks for trust your location.</Text>
+						<Text style={styles.infoText}>Thank you for trusting us with your location.</Text>
 					}
 
 					<Text style={[styles.infoText, { fontWeight: 'bold' }]}>
