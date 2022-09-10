@@ -32,11 +32,11 @@ export const SettingsProvider: React.FC<{children: React.ReactNode}> = ({ childr
 		(async () => {
 			const json = await AsyncStorage.getItem('@settings')
 
-			if (json) {
-				setSettings({ ...settingsDefault, ...JSON.parse(json) })
-			}
-
-			changeSettings({ hasLocationPermissions: await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION) })
+			changeSettings({
+				...settingsDefault,
+				...JSON.parse(json || '{}'),
+				hasLocationPermissions: await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION)
+			})
 
 			setAreSettingsLoaded(true)
 		})()
