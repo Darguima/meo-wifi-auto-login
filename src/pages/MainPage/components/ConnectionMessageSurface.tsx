@@ -1,9 +1,15 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
 
-import { Surface, Text, useTheme } from 'react-native-paper'
+import { Surface, Text, Avatar, useTheme } from 'react-native-paper'
 
-const ConnectionMessageSurface:React.FC = () => {
+interface Props {
+	connectionMessage: string,
+	missingMeoAccountCredentials?: boolean
+}
+
+const ConnectionMessageSurface:React.FC<Props> = ({ connectionMessage, missingMeoAccountCredentials }) => {
+	const colors = useTheme().colors
 	const styles = makeStyles(useTheme())
 
 	return (
@@ -12,17 +18,45 @@ const ConnectionMessageSurface:React.FC = () => {
 					Connection Message
 			</Text>
 
-			<View style={styles.surfaceRow}>
-				<Text>
-					Invalid Credentials
-				</Text>
-			</View>
+			{!connectionMessage &&
+			<>
+				{missingMeoAccountCredentials &&
+					<View style={styles.surfaceRow}>
+						<Text>Press </Text>
+						<Avatar.Icon
+							icon="dots-vertical"
+							size={24}
+							style={styles.miniFABIcon}
+							color={colors.onPrimaryVariant}
+						/>
+						<Text> to fill your Meo Account credentials.</Text>
+					</View>
+				}
+
+				<View style={styles.surfaceRow}>
+					<Text>Press </Text>
+					<Avatar.Icon
+						icon="wifi"
+						size={24}
+						style={styles.miniFABIcon}
+						color={colors.onPrimaryVariant}
+					/>
+					<Text> to login on Meo WiFi.</Text>
+				</View>
+			</>
+			}
+
+			{!!connectionMessage &&
+				<View style={styles.surfaceRow}>
+					<Text>{connectionMessage}</Text>
+				</View>
+			}
 
 		</Surface>
 	)
 }
 
-const makeStyles = ({ spacing }: ReactNativePaper.Theme) => StyleSheet.create({
+const makeStyles = ({ colors, spacing }: ReactNativePaper.Theme) => StyleSheet.create({
 	surface: {
 		elevation: 6,
 		width: '100%',
@@ -44,10 +78,14 @@ const makeStyles = ({ spacing }: ReactNativePaper.Theme) => StyleSheet.create({
 	surfaceRow: {
 		flexDirection: 'row',
 		justifyContent: 'center',
+		alignItems: 'center',
 
 		paddingVertical: spacing.padding
 		// paddingLeft: 6
-	}
+		// This Surface Rows are centered, so no need of padding left
+	},
+
+	miniFABIcon: { backgroundColor: colors.primaryVariant }
 })
 
 export default ConnectionMessageSurface

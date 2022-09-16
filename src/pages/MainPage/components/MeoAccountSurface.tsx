@@ -3,7 +3,12 @@ import { View, StyleSheet } from 'react-native'
 
 import { Surface, Text, useTheme } from 'react-native-paper'
 
-const MeoAccountSurface:React.FC = () => {
+interface Props {
+	email: string,
+	IP: string
+}
+
+const MeoAccountSurface:React.FC<Props> = ({ email, IP }) => {
 	const styles = makeStyles(useTheme())
 
 	return (
@@ -18,7 +23,7 @@ const MeoAccountSurface:React.FC = () => {
 				</Text>
 
 				<Text style={styles.underlinedText}>
-					myemail@gmail.com
+					{email || 'Not provided'}
 				</Text>
 			</View>
 
@@ -27,7 +32,7 @@ const MeoAccountSurface:React.FC = () => {
 					IP:
 				</Text>
 
-				<Text>192.168.1.59</Text>
+				<Text>{IP || '...'}</Text>
 			</View>
 
 		</Surface>

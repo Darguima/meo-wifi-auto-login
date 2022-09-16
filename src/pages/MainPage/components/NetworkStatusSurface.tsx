@@ -1,12 +1,23 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
 
-import { Surface, Text, useTheme } from 'react-native-paper'
+import { HelperText, Surface, Text, TouchableRipple, useTheme } from 'react-native-paper'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
-const NetworkStatusSurface:React.FC = () => {
+import useSettings from '@contexts/settings'
+import { useNavigationRootStack } from '@routes/index'
+
+interface Props {
+	connectedOnMeoWiFi: boolean,
+	connectedOnInternet: boolean
+}
+
+const NetworkStatusSurface:React.FC<Props> = ({ connectedOnMeoWiFi, connectedOnInternet }) => {
 	const { colors } = useTheme()
 	const styles = makeStyles(useTheme())
+
+	const { settings: { hasLocationPermissions } } = useSettings()
+	const { navigate } = useNavigationRootStack()
 
 	return (
 		<Surface style={styles.surface}>
@@ -14,17 +25,31 @@ const NetworkStatusSurface:React.FC = () => {
 					Network Status
 			</Text>
 
-			<View style={styles.surfaceRow}>
-				<Text>
-					Connected on Meo WiFi
-				</Text>
+			<TouchableRipple
+				style={styles.surfaceRow}
+				onPress={() => navigate('LocationPage')}
+				disabled={hasLocationPermissions}
+			>
+				<>
+					<View>
+						<Text>
+						Connected on Meo WiFi
+						</Text>
 
-				<MaterialCommunityIcons
-					name={'wifi'}
-					size={24}
-					color={colors.primaryVariant}
-				/>
-			</View>
+						{!connectedOnMeoWiFi &&
+						<HelperText type='info'>
+							{hasLocationPermissions ? "Don't forget to turn on location!" : 'Location needed, press me!'}
+						</HelperText>
+						}
+					</View>
+
+					<MaterialCommunityIcons
+						name={connectedOnMeoWiFi ? 'wifi' : (hasLocationPermissions ? 'wifi-off' : 'wifi-marker')}
+						size={24}
+						color={connectedOnMeoWiFi ? colors.primaryVariant : colors.error}
+					/>
+				</>
+			</TouchableRipple>
 
 			<View style={styles.surfaceRow}>
 				<Text>
@@ -32,9 +57,9 @@ const NetworkStatusSurface:React.FC = () => {
 				</Text>
 
 				<MaterialCommunityIcons
-					name={'wifi-off'}
+					name={connectedOnInternet ? 'wifi' : 'wifi-off'}
 					size={24}
-					color={colors.error}
+					color={connectedOnInternet ? colors.primaryVariant : colors.error}
 				/>
 			</View>
 
@@ -66,7 +91,8 @@ const makeStyles = ({ spacing }: ReactNativePaper.Theme) => StyleSheet.create({
 		justifyContent: 'space-between',
 
 		paddingVertical: spacing.divisionPadding,
-		paddingLeft: 6
+		paddingHorizontal: 6
+		// Right padding is needed due TouchableRipple
 	}
 })
 

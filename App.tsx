@@ -35,6 +35,7 @@ export const overrideTheme = {
 		onBackground: '#000000',
 
 		error: '#b00020',
+		onError: '#FFFFFF',
 
 		url: '#0077ff'
 	}
