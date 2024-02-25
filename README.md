@@ -26,6 +26,7 @@ Meo WiFi Auto Login is a project where you can automatically login to the Meo Wi
 
 - [Download & Installation](#download--installation-)
 - [How it works?](#how-it-works-)
+- [Demo](#demo-)
 - [Getting Started](#getting-started-)
 - [Technologies Used](#technologies-used-)
 - [Disclaimer](#-disclaimer-)
@@ -44,6 +45,10 @@ After installing the app, you will be guided through the initial setup. When fin
 In the future, we want the app to be able to automatically connect you in the background.
 
 Meo WiFi Auto Login is a GUI interface for my package [`meo-wifi-login-js`](https://github.com/Darguima/meo-wifi-login-js).
+
+## Demo 🎥
+
+https://user-images.githubusercontent.com/49988070/197389295-128bf269-2bce-4e5b-a520-05e3531c7902.mp4
 
 ## Getting Started 🚀
 
